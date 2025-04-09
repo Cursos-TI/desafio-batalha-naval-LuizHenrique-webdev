@@ -16,7 +16,7 @@ int main() {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        char letrasbatalha[10] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'              //declaração  de cabecalho de letras para mapeamento e orientação usuario
+        char letrasbatalha[10] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'              //declaração de cabecalho de letras para mapeamento e orientação usuario
         };
         char *colunabatalha[10] = { " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10"   //declaração de cabecalho de numeros para mapeamento e orientação do usuario
         };
@@ -27,37 +27,47 @@ int main() {
         int navio3[3] = {3, 3, 3};      //declaração do vetor do terceiro navio
         int navio4[4] = {3, 3, 3};      //declaração do vetor do quarto navio
 
-        index=2;
+        index=2;                                 //variavel que mantem um indice fixo
 
-        for (int k=0;  k<3; k++){
-            if (k>=0 && k<=9){
-             tabuleiro[index][k]=navio[k];
-            }else{
-                printf("essa posição esta fora do tabuleiro\n");}
+        for (int k=0;  k<3; k++){                //loop para percorrer colunas //neste caso a linha é fixa
+            if (k>=0 && k<=9){                   //se a coluna existir dentro do tabuleiro será feita a ação
+             tabuleiro[index][k]=navio[k];       //tabuleiro com linha fixa ira receber valor da vetor na coluna do loop 
+            }else{printf("essa posição esta fora do tabuleiro\n");} //se a coluna não existir no tabuleiro sera impresso a mensagem
         }
 
-        index=7;
+        index=7;                                 //variavel que mantem um indice fixo  
 
-        for(int l=0; l<3; l++){
-            if (l>=0 && l<=9){
-                tabuleiro[l][index]=navio2[l];
-            }else{
-                printf("essa posição esta fora do tabuleiro\n");
-            }
-        }
-
-        for (int m=0; m<3; m++){
-            if(m>=0 && m<=9){
-                for(int n=0; n<3; n++){
-                    if(n>=0 && n<=9){
-                        if(m==n){
-                            tabuleiro[m][n]=navio3[n];
-                        }
-                    }
-                }
-            }
+        for(int l=0; l<3; l++){                  //loop para percorrer linhas //neste caso a coluna é fixa
+            if (l>=0 && l<=9){                   //se a linha existir dentro do tabuleiro será feita a ação
+                tabuleiro[l][index]=navio2[l];   //tabuleiro com coluna fixa ira receber valor do vetor na linha do loop
+            }else{printf("essa posição esta fora do tabuleiro\n");} //se a coluna não existir no tabuleiro sera impresso a mensagem
         }
         
+
+        for (int m=0; m<3; m++){                         //loop para percorrer linhas
+            if(m>=0 && m<=9){                            //se a linha existir dentro do tabuleiro será feita a ação
+                for(int n=0; n<3; n++){                  //loop para percorrer colunas
+                    if(n>=0 && n<=9){                    //se a coluna existir dentro do tabuleiro será feita a ação
+                        if(m==n){                        //se indice de linha = indice de coluna (interseção) será feito a ação
+                            tabuleiro[m][n]=navio3[n];   //tabuleiro irá receber valor de navio na linha e coluna do loop
+                        }
+                    }else{printf("essa posição esta fora do tabuleiro\n");}
+                }
+            }else{printf("essa posição esta fora do tabuleiro\n");}
+        }
+        
+        for(int o=4; o<7; o++){                            //loop para percorrer linhas
+            if(o>=0 && o<=9){                              //se a linha existir dentro do tabuleiro será feita a ação
+                for(int p=5; p>2; p--){                    //loop para percorrer colunas
+                    if(p>=0 && p<=9){                      //se a coluna existir dentro do tabuleiro será feita a ação
+                        if(o+p==9){                        //se a soma de indice linha e coluna igual 9 será feita a ação  //a interseção de linha crescente e coluna decrescente em uma tabela 10x10 ocorre quando a soma de linha e coluna é 9
+                            tabuleiro[o][p] = navio4[0];   //tabuleiro irá receber valor de navio na linha e coluna do loop
+                        }
+                    }else{printf("essa posição esta fora do tabuleiro\n");}
+                }
+            }else{printf("essa posição esta fora do tabuleiro\n");}
+        }
+
 
         printf("             JOGO DE BATALHA NAVAL\n");    //cabeçalho  de jogo
         printf(" \n");                                     //pula uma linha
@@ -65,6 +75,7 @@ int main() {
         for (int i=0; i<10; i++){                          //loop para imprimir todos os valores do cabelhado de letras
             printf(" %c", letrasbatalha[i]);            
         }
+
         printf("\n");                              //pula uma linha no console
         for(int j=0; j<10; j++){                   //loop para imprimir colunas do cabeçalho de numeros 
             printf("%s", colunabatalha[j]); 
