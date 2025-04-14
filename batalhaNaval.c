@@ -6,21 +6,22 @@
 
 int main() {
         int tabuleiro[10][10]={                         //declaração de matriz 10x10, inicialmente todos os valores da matriz são 0
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
         char letrasbatalha[10] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'              //declaração de cabecalho de letras para mapeamento e orientação usuario
         };
         char *colunabatalha[10] = { " 1", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10"   //declaração de cabecalho de numeros para mapeamento e orientação do usuario
         };
         int index=0;
+        int aux=0;
 
         int navio[3] = {3, 3, 3};       //declaração do vetor do primeiro navio
         int navio2[3] = {3, 3, 3};      //declaração do vetor do segundo navio
@@ -66,6 +67,33 @@ int main() {
                     }else{printf("essa posição esta fora do tabuleiro\n");}
                 }
             }else{printf("essa posição esta fora do tabuleiro\n");}
+        }
+
+        for(int q=7; q<10; q++){                          //loop para percorrer linhas
+           int inicio=3-1-aux;                            //declara inicio do cone
+           int fim=3-1+aux;                               //declara fim do cone
+            for(int r=inicio; r<=fim; r++){               //loop de linhas
+                tabuleiro[q][r]=1;                        //coordenada no tabuleiro recebe valor 1 para cone
+            }
+            aux++;                                        //incrementa variavel 'aux' que auxilia no formato do cone
+        }
+
+        for (int s=6; s<9; s++){                //loop para percorrer linhas
+            int meio=7;                         //variavel que posiciona os meios da cruz
+            for (int t=5; t<10; t++){           //loop para percorrer colunas 
+                tabuleiro[meio][t]=1;           //linha do meio recebe valor 1 para cruz
+                tabuleiro[s][meio]=1;           //coluna do meio recebe valor 1 para cruz
+            }
+        }
+
+        for(int u=4; u<7; u++){                 //loop  para percorrer linhas
+            int metade=1;                       //variavel posiciona meio do octaedro
+            for(int v=0; v<3; v++){             //loop para percorrer colunas
+                if(u==5){                       //condicional de posicionamento do octaedro
+                    tabuleiro[5][v]=1;          //coluna recebe valor 1 para octaedro
+                }
+               tabuleiro[u][metade]=1;          //linha recebe valor 1 para octaedro
+            }
         }
 
 
